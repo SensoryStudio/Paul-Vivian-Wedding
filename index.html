@@ -123,18 +123,19 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         .gallery {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            height: 80%;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 0;
+        padding-bottom: 53.33%; /* 3:2 比例 */
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
         .gallery-container {
             position: absolute;
             top: 0;
@@ -261,9 +262,9 @@
                 padding: 6px 12px;
             }
             .gallery {
-                width: 90%;
-                height: 0;
-                padding-bottom: 120%; /* 3:4 aspect ratio */
+            width: 90%;
+            height: 0;
+            padding-bottom: 120%; /* 3:4 比例 */
             }
             .gallery-footer {
                 font-size: 0.7em;
@@ -489,15 +490,15 @@
             const gallery = document.querySelector('.gallery');
 
             if (windowWidth <= 768) {
-                // 手機版：保持寬3比高4
+                // 手機版：寬3比高4
                 gallery.style.width = '90%';
                 gallery.style.height = '0';
                 gallery.style.paddingBottom = '120%';
             } else {
-                // 電腦版：確保不超出螢幕
+                // 電腦版：寬3比高2
                 const maxWidth = windowWidth * 0.8;
                 const maxHeight = windowHeight * 0.8;
-                const aspectRatio = 3 / 4;
+                const aspectRatio = 3 / 2;
 
                 let width = maxWidth;
                 let height = width / aspectRatio;
