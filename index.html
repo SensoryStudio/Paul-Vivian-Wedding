@@ -136,10 +136,10 @@
             background-color: white;
         }
         .full-album-link {
-            font-size: 1.5em;
+            font-size: 1.2em;
             color: black;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border: 2px solid black;
             border-radius: 5px;
             transition: all 0.3s ease;
@@ -222,6 +222,10 @@
             .logo {
                 width: 60px;
             }
+            .full-album-link {
+                font-size: 1em;
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>
@@ -282,18 +286,21 @@
         let currentIndex = 0;
         let startX;
         let isDragging = false;
+        let isPasswordCorrect = false;
 
         passwordForm.addEventListener('submit', function(e) {
             e.preventDefault();
             if (passwordInput.value === '20240914') {
                 passwordScreen.style.display = 'none';
                 fullscreenBg.style.display = 'block';
+                isPasswordCorrect = true;
             } else {
                 errorMessage.textContent = '密碼錯誤，請重試。';
             }
         });
 
         function showGallery() {
+            if (!isPasswordCorrect) return;
             titleContainer.style.opacity = '0';
             fullscreenBg.style.filter = 'blur(5px)';
             overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
@@ -319,7 +326,6 @@
             }
         });
 
-        // 添加触摸事件支持
         window.addEventListener('touchstart', (e) => {
             if (!gallery.contains(e.target) && !lightbox.contains(e.target) && gallery.style.display === 'block') {
                 hideGallery();
@@ -362,7 +368,6 @@
         galleryContainer.addEventListener('mouseup', finishDragging);
         galleryContainer.addEventListener('mouseleave', finishDragging);
 
-        // 添加触摸事件支持
         galleryContainer.addEventListener('touchstart', (e) => {
             isDragging = true;
             startX = e.touches[0].pageX - galleryContainer.offsetLeft;
@@ -373,12 +378,12 @@
             e.preventDefault();
             const x = e.touches[0].pageX - galleryContainer.offsetLeft;
             const walk = (x - startX) / 2;
-                        galleryContainer.style.transform = `translateX(${-currentIndex * 100 + walk}%)`;
+            galleryContainer.style.transform = `translateX(${-currentIndex * 100 + walk}%)`;
         });
 
         galleryContainer.addEventListener('touchend', finishDragging);
 
-        function finishDragging(e) {
+                function finishDragging(e) {
             if (!isDragging) return;
             isDragging = false;
             galleryContainer.style.cursor = 'grab';
