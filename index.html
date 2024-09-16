@@ -123,19 +123,19 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         .gallery {
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-        height: 0;
-        padding-bottom: 53.33%; /* 3:2 比例 */
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            max-height: 80vh;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
         .gallery-container {
             position: absolute;
             top: 0;
@@ -244,6 +244,24 @@
             font-size: 0.8em;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
+        .full-album-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 12px;
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        .full-album-button:hover {
+            background-color: white;
+            color: black;
+        }
         @media (max-width: 768px) {
             .title {
                 font-size: 2.5em;
@@ -262,12 +280,15 @@
                 padding: 6px 12px;
             }
             .gallery {
-            width: 90%;
-            height: 0;
-            padding-bottom: 120%; /* 3:4 比例 */
+                width: 90%;
+                height: 90%;
             }
             .gallery-footer {
                 font-size: 0.7em;
+            }
+            .full-album-button {
+                font-size: 0.8em;
+                padding: 5px 10px;
             }
         }
     </style>
@@ -275,7 +296,7 @@
 <body>
     <div id="password-screen">
         <form id="password-form">
-            <input type="password" id="password-input" placeholder="請輸入婚禮日期(YYYYMMDD)">
+            <input type="password" id="password-input" placeholder="請輸入婚禮日期">
             <button type="submit" id="submit-password">確認</button>
         </form>
         <p id="error-message"></p>
@@ -332,8 +353,9 @@
         </div>
         <a href="#" class="nav-button prev">&lt;</a>
         <a href="#" class="nav-button next">&gt;</a>
-        <div class="gallery-footer">2024.09.14 | Paul & Vivian | GUMGUM Beer & Wings >>></div>
+        <div class="gallery-footer">2024.09.14 | Paul & Vivian | GUMGUM Beer & Wings</div>
     </div>
+    <button class="full-album-button">＞＞＞</button>
     <div class="lightbox">
         <span class="close">&times;</span>
         <img class="lightbox-content" src="" alt="Enlarged Photo">
@@ -354,6 +376,7 @@
         const lightboxImg = document.querySelector('.lightbox-content');
         const closeButton = document.querySelector('.close');
         const overlay = document.querySelector('.overlay');
+        const fullAlbumButton = document.querySelector('.full-album-button');
         const galleryFooter = document.querySelector('.gallery-footer');
         const totalImages = document.querySelectorAll('.gallery-item').length;
         let currentIndex = 0;
@@ -380,11 +403,13 @@
             setTimeout(() => {
                 titleContainer.style.display = 'none';
                 gallery.style.display = 'block';
+                fullAlbumButton.style.display = 'block';
             }, 500);
         }
 
         function hideGallery() {
             gallery.style.display = 'none';
+            fullAlbumButton.style.display = 'none';
             titleContainer.style.display = 'block';
             titleContainer.style.opacity = '1';
             fullscreenBg.style.filter = 'none';
@@ -392,12 +417,12 @@
         }
 
         window.addEventListener('click', (e) => {
-            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && gallery.style.display === 'block') {
+            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && e.target !== fullAlbumButton && gallery.style.display === 'block') {
                 hideGallery();
             }
         });
 
-        function moveGallery(direction) {
+                function moveGallery(direction) {
             currentIndex = (currentIndex + direction + totalImages) % totalImages;
             galleryContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
             updateGalleryFooter();
@@ -413,6 +438,12 @@
 
         prevButton.addEventListener('click', () => moveGallery(-1));
         nextButton.addEventListener('click', () => moveGallery(1));
+
+        fullAlbumButton.addEventListener('click', () => {
+            currentIndex = totalImages - 1;
+            galleryContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateGalleryFooter();
+        });
 
         galleryContainer.addEventListener('mousedown', (e) => {
             isDragging = true;
@@ -433,7 +464,7 @@
 
         galleryContainer.addEventListener('touchstart', (e) => {
             isDragging = true;
-                        startX = e.touches[0].pageX - galleryContainer.offsetLeft;
+            startX = e.touches[0].pageX - galleryContainer.offsetLeft;
         });
 
         galleryContainer.addEventListener('touchmove', (e) => {
@@ -482,41 +513,6 @@
         });
 
         titleContainer.addEventListener('click', showGallery);
-
-        // 調整 gallery 大小以適應螢幕
-        function adjustGallerySize() {
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            const gallery = document.querySelector('.gallery');
-
-            if (windowWidth <= 768) {
-                // 手機版：寬3比高4
-                gallery.style.width = '90%';
-                gallery.style.height = '0';
-                gallery.style.paddingBottom = '120%';
-            } else {
-                // 電腦版：寬3比高2
-                const maxWidth = windowWidth * 0.8;
-                const maxHeight = windowHeight * 0.8;
-                const aspectRatio = 3 / 2;
-
-                let width = maxWidth;
-                let height = width / aspectRatio;
-
-                if (height > maxHeight) {
-                    height = maxHeight;
-                    width = height * aspectRatio;
-                }
-
-                gallery.style.width = `${width}px`;
-                gallery.style.height = `${height}px`;
-                gallery.style.paddingBottom = '0';
-            }
-        }
-
-        // 在頁面加載和調整大小時調用函數
-        window.addEventListener('load', adjustGallerySize);
-        window.addEventListener('resize', adjustGallerySize);
     </script>
 </body>
 </html>
