@@ -228,7 +228,7 @@
 <body>
     <div id="password-screen">
         <form id="password-form">
-            <input type="password" id="password-input" placeholder="請輸入婚禮日期(YYYYMMDD)">
+            <input type="password" id="password-input" placeholder="請輸入婚禮日期">
             <button type="submit" id="submit-password">確認</button>
         </form>
         <p id="error-message"></p>
@@ -245,31 +245,12 @@
     </div>
     <div class="gallery">
         <div class="gallery-container">
-            <div class="gallery-item"><img src="https://i.ibb.co/NZSdrrr/2-S5-A7832.jpg" alt="Wedding Photo 1”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/mGB2CSb/2-S5-A7818.jpg" alt="Wedding Photo 2”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/XCnXL8r/3.jpg" alt="Wedding Photo 3”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/gmWrDXW/2-S5-A7829.jpg" alt="Wedding Photo 4”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/crG3hqG/2-S5-A7917.jpg" alt="Wedding Photo 5”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/qBXFb34/2-S5-A8614.jpg" alt="Wedding Photo 6”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/y42kQMj/2-S5-A8558.jpg" alt="Wedding Photo 7”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/tQxzqRq/2-S5-A8016.jpg" alt="Wedding Photo 8”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/svqMGvH/2-S5-A7565.jpg" alt="Wedding Photo 9”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/VHmzZXc/2-S5-A7578.jpg" alt="Wedding Photo 10”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/TBqZZpX/2-S5-A7839.jpg" alt="Wedding Photo 11”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/wNWC2wd/2-S5-A7842.jpg" alt="Wedding Photo 12”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/sHm1wmx/2-S5-A7847.jpg" alt="Wedding Photo 13”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/xLcGPmx/2-S5-A8288.jpg" alt="Wedding Photo 14”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/vwQhrBJ/2-S5-A8431.jpg" alt="Wedding Photo 15”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/4YywqJQ/2-S5-A8486.jpg" alt="Wedding Photo 16”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/W39WHYN/2-S5-A8634.jpg" alt="Wedding Photo 17”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/K6zNcBD/2-S5-A8712.jpg" alt="Wedding Photo 18”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/J3f8N6m/2-S5-A8836.jpg" alt="Wedding Photo 19”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/zRB9Xy4/2-S5-A8860.jpg" alt="Wedding Photo 20”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/2nv7jqW/2-S5-A8892.jpg" alt="Wedding Photo 21”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/ryFYGb1/2-S5-A8927.jpg" alt="Wedding Photo 22”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/r6KvL6J/2-S5-A9027.jpg" alt="Wedding Photo 23”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/c6Wd5KF/2-S5-A9095.jpg" alt="Wedding Photo 24”></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/44YSGpr/2-S5-A9166.jpg" alt="Wedding Photo 25”></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/svqMGvH/2-S5-A7565.jpg" alt="Wedding Photo 1"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/VHmzZXc/2-S5-A7578.jpg" alt="Wedding Photo 2"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/mGB2CSb/2-S5-A7818.jpg" alt="Wedding Photo 3"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/gmWrDXW/2-S5-A7829.jpg" alt="Wedding Photo 4"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/NZSdrrr/2-S5-A7832.jpg" alt="Wedding Photo 5"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/4MXtJ5N/2-S5-A7838.jpg" alt="Wedding Photo 6"></div>
             <div class="gallery-item full-album">
                 <a href="https://drive.google.com/drive/folders/1NpTZHVwbS8DpBGRu_ULATweQkyg3F3UI?usp=sharing" class="full-album-link" target="_blank">View the Full Photo Gallery</a>
             </div>
@@ -301,6 +282,7 @@
     let currentIndex = 0;
     let startX;
     let isDragging = false;
+    let initialTouchPos = null;
 
     passwordForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -330,16 +312,13 @@
         overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
     }
 
-    function handleInteraction(e) {
+    window.addEventListener('click', (e) => {
         if (!gallery.contains(e.target) && !lightbox.contains(e.target) && gallery.style.display === 'block') {
             hideGallery();
         } else if (gallery.style.display !== 'block' && !lightbox.contains(e.target)) {
             showGallery();
         }
-    }
-
-    window.addEventListener('click', handleInteraction);
-    window.addEventListener('touchend', handleInteraction);
+    });
 
     function moveGallery(direction) {
         currentIndex = (currentIndex + direction + totalImages) % totalImages;
@@ -358,41 +337,61 @@
         moveGallery(1);
     });
 
-    function handleStart(e) {
+    galleryContainer.addEventListener('mousedown', (e) => {
         isDragging = true;
-        startX = (e.type === 'mousedown') ? e.pageX : e.touches[0].pageX;
-        startX -= galleryContainer.offsetLeft;
+        startX = e.pageX - galleryContainer.offsetLeft;
         galleryContainer.style.cursor = 'grabbing';
-    }
+    });
 
-    function handleMove(e) {
+    galleryContainer.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         e.preventDefault();
-        const x = (e.type === 'mousemove') ? e.pageX : e.touches[0].pageX;
+        const x = e.pageX - galleryContainer.offsetLeft;
         const walk = (x - startX) / 2;
         galleryContainer.style.transform = `translateX(${-currentIndex * 100 + walk}%)`;
-    }
+    });
 
-    function handleEnd(e) {
+    galleryContainer.addEventListener('mouseup', finishDragging);
+    galleryContainer.addEventListener('mouseleave', finishDragging);
+
+    function finishDragging(e) {
         if (!isDragging) return;
         isDragging = false;
         galleryContainer.style.cursor = 'grab';
-        const x = (e.type === 'mouseup' || e.type === 'mouseleave') ? e.pageX : e.changedTouches[0].pageX;
+        const x = e.pageX - galleryContainer.offsetLeft;
         const walk = x - startX;
         if (walk < -100) moveGallery(1);
         else if (walk > 100) moveGallery(-1);
         else galleryContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
-    galleryContainer.addEventListener('mousedown', handleStart);
-    galleryContainer.addEventListener('touchstart', handleStart);
+    // Touch event handling for mobile
+    galleryContainer.addEventListener('touchstart', (e) => {
+        initialTouchPos = e.touches[0].clientX;
+        isDragging = true;
+        startX = e.touches[0].clientX - galleryContainer.offsetLeft;
+    });
 
-    galleryContainer.addEventListener('mousemove', handleMove);
-    galleryContainer.addEventListener('touchmove', handleMove);
+    galleryContainer.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const x = e.touches[0].clientX - galleryContainer.offsetLeft;
+        const walk = (x - startX) / 2;
+        galleryContainer.style.transform = `translateX(${-currentIndex * 100 + walk}%)`;
+    });
 
-    galleryContainer.addEventListener('mouseup', handleEnd);
-    galleryContainer.addEventListener('mouseleave', handleEnd);
-    galleryContainer.addEventListener('touchend', handleEnd);
+    galleryContainer.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        const touchPos = e.changedTouches[0].clientX;
+        const swipeDistance = touchPos - initialTouchPos;
+        isDragging = false;
+        if (swipeDistance > 100) {
+            moveGallery(-1);
+        } else if (swipeDistance < -100) {
+            moveGallery(1);
+        } else {
+            galleryContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+    });
 
     document.querySelectorAll('.gallery-item img').forEach(img => {
         img.addEventListener('click', (e) => {
@@ -413,4 +412,5 @@
         }
     });
 </script>
-                e.
+</body>
+</html>
