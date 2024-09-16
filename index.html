@@ -129,8 +129,8 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 80%;
-            height: 80%;
-            max-height: 80vh;
+            height: 0;
+            padding-bottom: 60%; /* 4:3 aspect ratio */
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             overflow: hidden;
@@ -244,24 +244,6 @@
             font-size: 0.8em;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
-        .full-album-button {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 6px 12px;
-            background-color: black;
-            color: white;
-            border: 2px solid white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-        }
-        .full-album-button:hover {
-            background-color: white;
-            color: black;
-        }
         @media (max-width: 768px) {
             .title {
                 font-size: 2.5em;
@@ -281,14 +263,10 @@
             }
             .gallery {
                 width: 90%;
-                height: 90%;
+                padding-bottom: 120%; /* 3:4 aspect ratio */
             }
             .gallery-footer {
                 font-size: 0.7em;
-            }
-            .full-album-button {
-                font-size: 0.8em;
-                padding: 5px 10px;
             }
         }
     </style>
@@ -296,7 +274,7 @@
 <body>
     <div id="password-screen">
         <form id="password-form">
-            <input type="password" id="password-input" placeholder="請輸入婚禮日期">
+            <input type="password" id="password-input" placeholder="請輸入婚禮日期(YYYYMMDD)">
             <button type="submit" id="submit-password">確認</button>
         </form>
         <p id="error-message"></p>
@@ -353,9 +331,8 @@
         </div>
         <a href="#" class="nav-button prev">&lt;</a>
         <a href="#" class="nav-button next">&gt;</a>
-        <div class="gallery-footer">2024.09.14 | Paul & Vivian | GUMGUM Beer & Wings</div>
+        <div class="gallery-footer">2024.09.14 | Paul & Vivian | GUMGUM Beer & Wings >>></div>
     </div>
-    <button class="full-album-button">＞＞＞</button>
     <div class="lightbox">
         <span class="close">&times;</span>
         <img class="lightbox-content" src="" alt="Enlarged Photo">
@@ -376,8 +353,6 @@
         const lightboxImg = document.querySelector('.lightbox-content');
         const closeButton = document.querySelector('.close');
         const overlay = document.querySelector('.overlay');
-        const fullAlbumButton = document.querySelector('.full-album-button');
-        const galleryFooter = document.querySelector('.gallery-footer');
         const totalImages = document.querySelectorAll('.gallery-item').length;
         let currentIndex = 0;
         let startX;
@@ -403,13 +378,11 @@
             setTimeout(() => {
                 titleContainer.style.display = 'none';
                 gallery.style.display = 'block';
-                fullAlbumButton.style.display = 'block';
             }, 500);
         }
 
         function hideGallery() {
             gallery.style.display = 'none';
-            fullAlbumButton.style.display = 'none';
             titleContainer.style.display = 'block';
             titleContainer.style.opacity = '1';
             fullscreenBg.style.filter = 'none';
@@ -417,32 +390,36 @@
         }
 
         window.addEventListener('click', (e) => {
-            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && e.target !== fullAlbumButton && gallery.style.display === 'block') {
+            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && gallery.style.display === 'block') {
                 hideGallery();
+            } else if (gallery.style.display !== 'block' && !lightbox.contains(e.target)) {
+                showGallery();
             }
         });
 
-                function moveGallery(direction) {
+        window.addEventListener('touchstart', (e) => {
+            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && gallery.style.display === 'block') {
+                hideGallery();
+            } else if (gallery.style.display !== 'block' && !lightbox.contains(e.target)) {
+                showGallery();
+            }
+        });
+
+        function moveGallery(direction) {
             currentIndex = (currentIndex + direction + totalImages) % totalImages;
             galleryContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-            updateGalleryFooter();
         }
 
-        function updateGalleryFooter() {
-            if (currentIndex === totalImages - 1) {
-                galleryFooter.style.display = 'none';
-            } else {
-                galleryFooter.style.display = 'block';
-            }
-        }
+        prevButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            moveGallery(-1);
+        });
 
-        prevButton.addEventListener('click', () => moveGallery(-1));
-        nextButton.addEventListener('click', () => moveGallery(1));
-
-        fullAlbumButton.addEventListener('click', () => {
-            currentIndex = totalImages - 1;
-            galleryContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-            updateGalleryFooter();
+        nextButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            moveGallery(1);
         });
 
         galleryContainer.addEventListener('mousedown', (e) => {
@@ -456,7 +433,7 @@
             e.preventDefault();
             const x = e.pageX - galleryContainer.offsetLeft;
             const walk = (x - startX) / 2;
-            galleryContainer.style.transform = `translateX(${-currentIndex * 100 + walk}%)`;
+                        galleryContainer.style.transform = `translateX(${-currentIndex * 100 + walk}%)`;
         });
 
         galleryContainer.addEventListener('mouseup', finishDragging);
@@ -511,8 +488,6 @@
                 lightbox.style.display = 'none';
             }
         });
-
-        titleContainer.addEventListener('click', showGallery);
     </script>
 </body>
 </html>
