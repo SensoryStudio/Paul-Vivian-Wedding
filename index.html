@@ -49,7 +49,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://i.ibb.co/vYJrbXG/image.jpg') no-repeat center center fixed;
+            background: url('https://i.ibb.co/GHYDQP6/2S5A7528.jpg') no-repeat center center fixed;
             background-size: cover;
             transition: all 0.5s ease;
             display: none;
@@ -224,6 +224,23 @@
             font-size: 0.8em;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
+        .full-album-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        .full-album-button:hover {
+            background-color: white;
+        }
         @media (max-width: 768px) {
             .title {
                 font-size: 2.5em;
@@ -248,6 +265,10 @@
             .gallery-footer {
                 font-size: 0.7em;
             }
+            .full-album-button {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
@@ -271,48 +292,21 @@
     </div>
     <div class="gallery">
         <div class="gallery-container">
-            <div class="gallery-item"><img src="https://i.ibb.co/XJHFZFc/1.jpg" alt="Wedding Photo 1"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/JRRf82m/2.jpg" alt="Wedding Photo 2"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/n3RzdLv/3.jpg" alt="Wedding Photo 3"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/c6jMjPJ/4.jpg" alt="Wedding Photo 4"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/HtGzYq2/5.jpg" alt="Wedding Photo 5"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/8sZJH0p/6.jpg" alt="Wedding Photo 6"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/gP723S8/7.jpg" alt="Wedding Photo 7"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/0CPWvVN/8.jpg" alt="Wedding Photo 8"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/jvRC0rX/9.jpg" alt="Wedding Photo 9"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/mcN48BZ/10.jpg" alt="Wedding Photo 10"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/mSdVJQz/11.jpg" alt="Wedding Photo 11"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/tDPHGS6/12.jpg" alt="Wedding Photo 12"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/4WWRzLY/13.jpg" alt="Wedding Photo 13"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/47Nj1md/14.jpg" alt="Wedding Photo 14"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/tK84Hx4/15.jpg" alt="Wedding Photo 15"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/9ZZgn38/16.jpg" alt="Wedding Photo 16"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/sVbfjG8/17.jpg" alt="Wedding Photo 17"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/J5W7Rtv/18.jpg" alt="Wedding Photo 18"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/d4gpDy2/19.jpg" alt="Wedding Photo 19"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/ZTtggXj/20.jpg" alt="Wedding Photo 20"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/1mT5Nry/21.jpg" alt="Wedding Photo 21"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/2jrRfNW/22.jpg" alt="Wedding Photo 22"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/3hY496D/23.jpg" alt="Wedding Photo 23"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/ryqDJdp/24.jpg" alt="Wedding Photo 24"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/nL4zzZC/25.jpg" alt="Wedding Photo 25"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/rbvQxVY/26.jpg" alt="Wedding Photo 26"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/s1093Mv/27.jpg" alt="Wedding Photo 27"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/pnMnSS3/28.jpg" alt="Wedding Photo 28"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/vj5PP4s/29.jpg" alt="Wedding Photo 29"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/hmD8Yyr/30.jpg" alt="Wedding Photo 30"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/Pz9b5KZ/31.jpg" alt="Wedding Photo 31"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/X3HGTY4/32.jpg" alt="Wedding Photo 32"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/qxp8WQ2/33.jpg" alt="Wedding Photo 33"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/XCnXL8r/3.jpg" alt="Wedding Photo 34"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/svqMGvH/2-S5-A7565.jpg" alt="Wedding Photo 1"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/VHmzZXc/2-S5-A7578.jpg" alt="Wedding Photo 2"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/mGB2CSb/2-S5-A7818.jpg" alt="Wedding Photo 3"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/gmWrDXW/2-S5-A7829.jpg" alt="Wedding Photo 4"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/NZSdrrr/2-S5-A7832.jpg" alt="Wedding Photo 5"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/4MXtJ5N/2-S5-A7838.jpg" alt="Wedding Photo 6"></div>
             <div class="gallery-item full-album">
                 <a href="https://drive.google.com/drive/folders/1NpTZHVwbS8DpBGRu_ULATweQkyg3F3UI?usp=sharing" class="full-album-link" target="_blank">View the Full Photo Gallery</a>
             </div>
         </div>
         <a href="#" class="nav-button prev">&lt;</a>
         <a href="#" class="nav-button next">&gt;</a>
-        <div class="gallery-footer">2024.09.14 | Paul & Vivian | GUMGUM Beer & Wings</div>
+        <div class="gallery-footer">2024.09.14 | Paul & Vivian | GUMGUM Beer & Wings >>></div>
     </div>
+    <button class="full-album-button">View Full Album</button>
     <div class="lightbox">
         <span class="close">&times;</span>
         <img class="lightbox-content" src="" alt="Enlarged Photo">
@@ -333,6 +327,8 @@
         const lightboxImg = document.querySelector('.lightbox-content');
         const closeButton = document.querySelector('.close');
         const overlay = document.querySelector('.overlay');
+        const fullAlbumButton = document.querySelector('.full-album-button');
+        const galleryFooter = document.querySelector('.gallery-footer');
         const totalImages = document.querySelectorAll('.gallery-item').length;
         let currentIndex = 0;
         let startX;
@@ -358,11 +354,13 @@
             setTimeout(() => {
                 titleContainer.style.display = 'none';
                 gallery.style.display = 'block';
+                fullAlbumButton.style.display = 'block';
             }, 500);
         }
 
         function hideGallery() {
             gallery.style.display = 'none';
+            fullAlbumButton.style.display = 'none';
             titleContainer.style.display = 'block';
             titleContainer.style.opacity = '1';
             fullscreenBg.style.filter = 'none';
@@ -370,7 +368,7 @@
         }
 
         window.addEventListener('click', (e) => {
-            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && gallery.style.display === 'block') {
+            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && e.target !== fullAlbumButton && gallery.style.display === 'block') {
                 hideGallery();
             } else if (gallery.style.display !== 'block' && !lightbox.contains(e.target)) {
                 showGallery();
@@ -378,28 +376,32 @@
         });
 
         window.addEventListener('touchstart', (e) => {
-            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && gallery.style.display === 'block') {
+            if (!gallery.contains(e.target) && !lightbox.contains(e.target) && e.target !== fullAlbumButton && gallery.style.display === 'block') {
                 hideGallery();
-            } else if (gallery.style.display !== 'block' && !lightbox.contains(e.target)) {
-                showGallery();
             }
         });
 
         function moveGallery(direction) {
             currentIndex = (currentIndex + direction + totalImages) % totalImages;
             galleryContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateGalleryFooter();
         }
 
-        prevButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            moveGallery(-1);
-        });
+        function updateGalleryFooter() {
+            if (currentIndex === totalImages - 1) {
+                galleryFooter.style.display = 'none';
+            } else {
+                galleryFooter.style.display = 'block';
+            }
+        }
 
-        nextButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            moveGallery(1);
+        prevButton.addEventListener('click', () => moveGallery(-1));
+        nextButton.addEventListener('click', () => moveGallery(1));
+
+        fullAlbumButton.addEventListener('click', () => {
+            currentIndex = totalImages - 1;
+            galleryContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateGalleryFooter();
         });
 
         galleryContainer.addEventListener('mousedown', (e) => {
@@ -413,7 +415,7 @@
             e.preventDefault();
             const x = e.pageX - galleryContainer.offsetLeft;
             const walk = (x - startX) / 2;
-                        galleryContainer.style.transform = `translateX(${-currentIndex * 100 + walk}%)`;
+            galleryContainer.style.transform = `translateX(${-currentIndex * 100 + walk}%)`;
         });
 
         galleryContainer.addEventListener('mouseup', finishDragging);
@@ -468,6 +470,8 @@
                 lightbox.style.display = 'none';
             }
         });
+
+        titleContainer.addEventListener('click', showGallery);
     </script>
 </body>
 </html>
