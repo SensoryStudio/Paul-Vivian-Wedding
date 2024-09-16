@@ -11,6 +11,37 @@
             padding: 0;
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
+            background-color: white;
+        }
+        #password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        #password-form {
+            text-align: center;
+        }
+        #password-input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #submit-password {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #error-message {
+            color: red;
+            margin-top: 10px;
         }
         .fullscreen-bg {
             position: fixed;
@@ -21,6 +52,7 @@
             background: url('https://i.ibb.co/GHYDQP6/2S5A7528.jpg') no-repeat center center fixed;
             background-size: cover;
             transition: all 0.5s ease;
+            display: none;
         }
         .overlay {
             position: absolute;
@@ -41,7 +73,7 @@
             width: 90%;
         }
         .logo {
-            width: 150px;
+            width: 100px;
             height: auto;
             margin-bottom: 20px;
         }
@@ -61,6 +93,13 @@
             font-size: 1.5em;
             margin-top: 20px;
             letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .tagline {
+            color: white;
+            font-size: 1.2em;
+            margin-top: 10px;
+            font-style: italic;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         .gallery {
@@ -89,6 +128,25 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        .gallery-item.full-album {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+        .full-album-link {
+            font-size: 1.5em;
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .full-album-link:hover {
+            background-color: black;
+            color: white;
         }
         .nav-button {
             position: absolute;
@@ -158,13 +216,24 @@
             .subtitle {
                 font-size: 1.2em;
             }
+            .tagline {
+                font-size: 1em;
+            }
             .logo {
-                width: 100px;
+                width: 80px;
             }
         }
     </style>
 </head>
 <body>
+    <div id="password-screen">
+        <form id="password-form">
+            <input type="password" id="password-input" placeholder="請輸入婚禮日期(YYYYMMDD)">
+            <button type="submit" id="submit-password">確認</button>
+        </form>
+        <p id="error-message"></p>
+    </div>
+
     <div class="fullscreen-bg">
         <div class="overlay"></div>
     </div>
@@ -172,14 +241,40 @@
         <img src="https://i.ibb.co/yYRGVky/logo-02.png" alt="Wedding Logo" class="logo">
         <h1 class="title">Paul & Vivian's Wedding</h1>
         <h2 class="subtitle">GUMGUM Beer & Wings</h2>
+        <p class="tagline">Explore The Best Moments of the Day</p>
     </div>
     <div class="gallery">
         <div class="gallery-container">
-            <div class="gallery-item"><img src="https://i.ibb.co/WyMmKqh/2S5A7832.jpg" alt="Wedding Photo 1"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/2NmdmY8/2S5A7829.jpg" alt="Wedding Photo 2"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/3zx17t7/2S5A7818.jpg" alt="Wedding Photo 3"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/10BJBqr/2S5A7917.jpg" alt="Wedding Photo 4"></div>
-            <div class="gallery-item"><img src="https://i.ibb.co/s3YYsgC/2S5A7977.jpg" alt="Wedding Photo 5"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/TBqZZpX/2-S5-A7839.jpg" alt="Wedding Photo 1"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/4MXtJ5N/2-S5-A7838.jpg" alt="Wedding Photo 2"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/svqMGvH/2-S5-A7565.jpg" alt="Wedding Photo 3"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/VHmzZXc/2-S5-A7578.jpg" alt="Wedding Photo 4"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/mGB2CSb/2-S5-A7818.jpg" alt="Wedding Photo 5"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/gmWrDXW/2-S5-A7829.jpg" alt="Wedding Photo 6"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/NZSdrrr/2-S5-A7832.jpg" alt="Wedding Photo 7"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/wNWC2wd/2-S5-A7842.jpg" alt="Wedding Photo 8"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/sHm1wmx/2-S5-A7847.jpg" alt="Wedding Photo 9"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/crG3hqG/2-S5-A7917.jpg" alt="Wedding Photo 10"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/tQxzqRq/2-S5-A8016.jpg" alt="Wedding Photo 11"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/xLcGPmx/2-S5-A8288.jpg" alt="Wedding Photo 12"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/vwQhrBJ/2-S5-A8431.jpg" alt="Wedding Photo 13"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/4YywqJQ/2-S5-A8486.jpg" alt="Wedding Photo 14"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/y42kQMj/2-S5-A8558.jpg" alt="Wedding Photo 15"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/swm1hkf/2-S5-A8591.jpg" alt="Wedding Photo 16"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/qBXFb34/2-S5-A8614.jpg" alt="Wedding Photo 17"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/W39WHYN/2-S5-A8634.jpg" alt="Wedding Photo 18"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/K6zNcBD/2-S5-A8712.jpg" alt="Wedding Photo 19"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/wwYv39j/2-S5-A8727.jpg" alt="Wedding Photo 20"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/J3f8N6m/2-S5-A8836.jpg" alt="Wedding Photo 21"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/zRB9Xy4/2-S5-A8860.jpg" alt="Wedding Photo 22"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/2nv7jqW/2-S5-A8892.jpg" alt="Wedding Photo 23"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/ryFYGb1/2-S5-A8927.jpg" alt="Wedding Photo 24"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/r6KvL6J/2-S5-A9027.jpg" alt="Wedding Photo 25"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/c6Wd5KF/2-S5-A9095.jpg" alt="Wedding Photo 26"></div>
+            <div class="gallery-item"><img src="https://i.ibb.co/44YSGpr/2-S5-A9166.jpg" alt="Wedding Photo 27"></div>
+            <div class="gallery-item full-album">
+                <a href="https://drive.google.com/drive/folders/1NpTZHVwbS8DpBGRu_ULATweQkyg3F3UI?usp=sharing" class="full-album-link" target="_blank">View the Full Photo Gallery</a>
+            </div>
         </div>
         <a href="#" class="nav-button prev">&lt;</a>
         <a href="#" class="nav-button next">&gt;</a>
@@ -190,6 +285,11 @@
     </div>
 
     <script>
+        const passwordScreen = document.getElementById('password-screen');
+        const passwordForm = document.getElementById('password-form');
+        const passwordInput = document.getElementById('password-input');
+        const errorMessage = document.getElementById('error-message');
+        const fullscreenBg = document.querySelector('.fullscreen-bg');
         const titleContainer = document.querySelector('.title-container');
         const gallery = document.querySelector('.gallery');
         const galleryContainer = document.querySelector('.gallery-container');
@@ -198,12 +298,21 @@
         const lightbox = document.querySelector('.lightbox');
         const lightboxImg = document.querySelector('.lightbox-content');
         const closeButton = document.querySelector('.close');
-        const fullscreenBg = document.querySelector('.fullscreen-bg');
         const overlay = document.querySelector('.overlay');
         const totalImages = document.querySelectorAll('.gallery-item').length;
         let currentIndex = 0;
         let startX;
         let isDragging = false;
+
+        passwordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (passwordInput.value === '20240914') {
+                passwordScreen.style.display = 'none';
+                fullscreenBg.style.display = 'block';
+            } else {
+                errorMessage.textContent = '密碼錯誤，請重試。';
+            }
+        });
 
         function showGallery() {
             titleContainer.style.opacity = '0';
